@@ -1,0 +1,3 @@
+/home/dell/Downloads/muet-prospectus-ai/muet-prospectus-ai/build/CMakeFiles/search_engine.dir
+/home/dell/Downloads/muet-prospectus-ai/muet-prospectus-ai/build/CMakeFiles/edit_cache.dir
+/home/dell/Downloads/muet-prospectus-ai/muet-prospectus-ai/build/CMakeFiles/rebuild_cache.dir

@@ -1,115 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MUET Digital Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUET Prospectus AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- TOP BAR -->
   <header class="top">
     <div class="brand">
-      <img class="logo" src="data:image/jpeg;base64,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" alt="MUET logo">
-      <div>
-        <div class="uni">MEHRAN UNIVERSITY OF ENGINEERING AND TECHNOLOGY</div>
-        <div class="loc">Jamshoro, Sindh, Pakistan</div>
+      <div class="uni">Mehran UET</div>
+      <div class="loc">Jamshoro, Pakistan</div>
+    </div>
+    <div class="controls">
+      <button id="newChatBtn">New Search</button>
+      <button id="historyBtn">History</button>
+      <button id="aboutBtn">About</button>
+      <button id="contactBtn">Contact</button>
+      <button id="themeBtn"><span id="themeLabel">Light mode</span></button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- CHAT VIEW -->
+    <div id="view-chat" class="view active">
+      <div class="hero-head">
+        <h1 class="main-title">MUET Prospectus AI</h1>
+        <p class="subtitle">High-Performance C++ & FastAPI Semantic Prospectus Assistant</p>
+      </div>
+
+      <div class="search-container">
+        <input type="text" id="question" placeholder="Type your query..." value="nothing">
+        <button id="sendBtn" class="green-btn">Search</button>
+      </div>
+
+      <div class="response-card">
+        <div class="card-header">SEARCH OUTPUT / ENGINE RESPONSE</div>
+        <div id="chat" class="output-body">
+          <p>[C++] Successfully indexed 250 sections from prospectus.</p>
+          <p>Type a question above and click Search to query the engine.</p>
+        </div>
       </div>
     </div>
 
-   <button id="newChatBtn" type="button" aria-label="New chat">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M12 5v14M5 12h14"/>
-  </svg>
-  <span class="btn-label">New chat</span>
-</button>
-
-<button id="historyBtn" type="button" aria-label="History">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="9"/>
-    <path d="M12 7v5l3 2"/>
-  </svg>
-  <span class="btn-label">History</span>
-</button>
-
-<button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle dark mode">
-  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
-  </svg>
-  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="4"/>
-    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
-  </svg>
-  <span id="themeLabel" class="btn-label">Dark mode</span>
-</button>  <div class="layout">
-
-
-      <!-- ASSISTANT VIEW -->
-    <section id="view-chat" class="view active">
-      <div class="chat-head">
-        <h1>MUET Digital Assistant</h1>
-        <p>Ask about admissions, fees, attendance, hostels, scholarships and more</p>
-      </div>
-
-      <div id="chat"></div>
-
-      <div id="chipsWrap">
-  <div id="chips">
-    <button class="chip" type="button">What is the attendance requirement?</button>
-    <button class="chip" type="button">How can I get hostel accommodation?</button>
-    <button class="chip" type="button">How can I get a scholarship?</button>
-    <button class="chip" type="button">What is the admission process?</button>
-    <button class="chip" type="button">Who is the chairperson of Computer Systems Engineering?</button>
-  </div>
-</div>
-      <div class="input-row">
-        <input id="question" type="text" placeholder="Type your question..." autocomplete="off">
-  <button id="sendBtn" type="button" aria-label="Send">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>
-  </svg>
-</button>
-      </div>
-      <p class="note">Answers come from the MUET Undergraduate Prospectus. Please confirm important details with the university office.</p>
-    </section>
-
     <!-- HISTORY VIEW -->
-    <section id="view-history" class="view">
-      <div class="chat-head">
-<div class="history-tools">
-  <input id="historySearch" type="text" placeholder="Search chats..." autocomplete="off">
-  <button id="clearHistoryBtn" type="button">Clear all</button>
-</div>
-        <h1>Chat history</h1>
-        <p>Open a previous chat to continue it</p>
+    <div id="view-history" class="view">
+      <h1 class="main-title">Search History</h1>
+      <div class="history-tools">
+        <input type="text" id="historySearch" placeholder="Search saved queries...">
+        <button id="clearHistoryBtn">Clear History</button>
       </div>
       <div id="historyList"></div>
-      <button id="backToChatBtn" type="button">&larr; Back to chat</button>
-    </section>
-
+      <button id="backToChatBtn">&larr; Back to Search</button>
+    </div>
 
     <!-- ABOUT VIEW -->
-    <section id="view-about" class="view">
-      <h1>About the project</h1>
-      <p>Digital Assistant Search Engine is a Computer Programming project. It answers student questions by matching keywords against a knowledge base.</p>
-      <p><b>Student:</b> Your Name</p>
-      <p><b>Roll No:</b> Your Roll Number</p>
-      <p><b>Supervisor:</b> Teacher Name</p>
-    </section>
+    <div id="view-about" class="view">
+      <h1 class="main-title">About MUET Prospectus AI</h1>
+      <p>High-Performance C++ core indexer connected via FastAPI backend for real-time semantic query responses.</p>
+    </div>
 
     <!-- CONTACT VIEW -->
-    <section id="view-contact" class="view">
-      <h1>Contact</h1>
-      <p><b>University:</b> Mehran University of Engineering and Technology</p>
-      <p><b>Email:</b> write the email here</p>
-      <p><b>Phone:</b> write the phone number here</p>
-    </section>
+    <div id="view-contact" class="view">
+      <h1 class="main-title">Contact</h1>
+      <p>Mehran University of Engineering & Technology, Jamshoro, Pakistan.</p>
+    </div>
+  </main>
 
-  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatBox = document.getElementById("chat");
+      const questionInput = document.getElementById("question");
+      const sendBtn = document.getElementById("sendBtn");
 
-  <footer>&copy; 2026 MUET Digital Assistant &mdash; Computer Programming Project</footer>
+      const newChatBtn = document.getElementById("newChatBtn");
+      const historyBtn = document.getElementById("historyBtn");
+      const aboutBtn = document.getElementById("aboutBtn");
+      const contactBtn = document.getElementById("contactBtn");
+      const themeBtn = document.getElementById("themeBtn");
+      const themeLabel = document.getElementById("themeLabel");
+      const backToChatBtn = document.getElementById("backToChatBtn");
+      const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+      const historySearch = document.getElementById("historySearch");
+      const historyList = document.getElementById("historyList");
 
-  <script src="script.js"></script>
+      const viewChat = document.getElementById("view-chat");
+      const viewHistory = document.getElementById("view-history");
+      const viewAbout = document.getElementById("view-about");
+      const viewContact = document.getElementById("view-contact");
+      const allViews = [viewChat, viewHistory, viewAbout, viewContact];
+
+      let chatHistory = JSON.parse(localStorage.getItem("muet_chat_history")) || [];
+
+      function showView(targetView) {
+        allViews.forEach((v) => v && v.classList.remove("active"));
+        if (targetView) targetView.classList.add("active");
+      }
+
+      if (newChatBtn) newChatBtn.addEventListener("click", () => showView(viewChat));
+      if (historyBtn) historyBtn.addEventListener("click", () => { renderHistory(); showView(viewHistory); });
+      if (aboutBtn) aboutBtn.addEventListener("click", () => showView(viewAbout));
+      if (contactBtn) contactBtn.addEventListener("click", () => showView(viewContact));
+      if (backToChatBtn) backToChatBtn.addEventListener("click", () => showView(viewChat));
+
+      if (themeBtn) {
+        themeBtn.addEventListener("click", () => {
+          const currentTheme = document.documentElement.getAttribute("data-theme");
+          const nextTheme = currentTheme === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", nextTheme);
+          if (themeLabel) themeLabel.textContent = nextTheme === "dark" ? "Light mode" : "Dark mode";
+        });
+      }
+
+      async function handleSend() {
+        const text = questionInput.value.trim();
+        if (!text) return;
+
+        chatBox.innerHTML = `<p>[C++] Searching prospectus for "${escapeHtml(text)}"...</p>`;
+
+        try {
+          const response = await fetch(`http://127.0.0.1:8001/search?q=${encodeURIComponent(text)}`);
+          if (!response.ok) throw new Error(`Status ${response.status}`);
+          const data = await response.json();
+
+          let answerText = "";
+          if (typeof data.results === "string") {
+            answerText = data.results;
+          } else if (Array.isArray(data.results) && data.results.length > 0) {
+            answerText = data.results.join("\n\n");
+          } else {
+            answerText = "I could not find specific details regarding that query in your prospectus file.";
+          }
+
+          chatBox.innerHTML = `<p><strong>[C++] Engine Response:</strong></p><p>${escapeHtml(answerText)}</p>`;
+          saveToHistory(text, answerText);
+        } catch (err) {
+          chatBox.innerHTML = `<p style="color: #ef4444;">Error connecting to FastAPI server on port 8001.</p>`;
+        }
+      }
+
+      if (sendBtn) sendBtn.addEventListener("click", handleSend);
+      if (questionInput) {
+        questionInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") handleSend();
+        });
+      }
+
+      function saveToHistory(query, answer) {
+        chatHistory.unshift({ id: Date.now(), query, answer, timestamp: new Date().toLocaleTimeString() });
+        localStorage.setItem("muet_chat_history", JSON.stringify(chatHistory));
+      }
+
+      function renderHistory(filterText = "") {
+        if (!historyList) return;
+        historyList.innerHTML = "";
+        const filtered = chatHistory.filter((item) => item.query.toLowerCase().includes(filterText.toLowerCase()));
+        if (filtered.length === 0) {
+          historyList.innerHTML = "<p style='color: #94a3b8; padding: 0.5rem;'>No search history found.</p>";
+          return;
+        }
+        filtered.forEach((item) => {
+          const card = document.createElement("div");
+          card.style.cssText = "padding: 0.75rem; border-bottom: 1px solid #334155; cursor: pointer;";
+          card.innerHTML = `<div style="font-weight: 600;">${escapeHtml(item.query)}</div><div style="font-size: 0.75rem; color: #94a3b8;">${item.timestamp}</div>`;
+          card.addEventListener("click", () => {
+            showView(viewChat);
+            questionInput.value = item.query;
+            chatBox.innerHTML = `<p><strong>[C++] Engine Response:</strong></p><p>${escapeHtml(item.answer)}</p>`;
+          });
+          historyList.appendChild(card);
+        });
+      }
+
+      if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener("click", () => {
+          chatHistory = [];
+          localStorage.removeItem("muet_chat_history");
+          renderHistory();
+        });
+      }
+
+      if (historySearch) {
+        historySearch.addEventListener("input", (e) => renderHistory(e.target.value));
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+    });
+  </script>
 </body>
 </html>

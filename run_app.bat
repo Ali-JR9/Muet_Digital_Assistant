@@ -30,7 +30,7 @@ if not exist "Muet_Digital_Assistant-main" if not exist "Muet_Digital_Assistant"
     )
 )
 
-:: 3. Change directory into project folder BEFORE running Python commands
+:: 3. Change directory into project folder BEFORE running Python setup commands
 if exist "Muet_Digital_Assistant" (
     cd Muet_Digital_Assistant
 ) else if exist "Muet_Digital_Assistant-main" (

@@ -27,14 +27,14 @@ if not exist "Muet_Digital_Assistant" if not exist "Muet_Digital_Assistant-main"
     )
 )
 
-:: 3. Force change into the unzipped or cloned project directory
+:: 3. Change directory into project folder BEFORE running Python commands
 if exist "Muet_Digital_Assistant" (
     cd /d "%~dp0Muet_Digital_Assistant"
 ) else if exist "Muet_Digital_Assistant-main" (
     cd /d "%~dp0Muet_Digital_Assistant-main"
 )
 
-:: 4. Create virtual environment inside project folder
+:: 4. Create virtual environment
 if not exist "venv" (
     echo Creating Python environment...
     python -m venv venv
@@ -44,7 +44,7 @@ if not exist "venv" (
 call venv\Scripts\activate.bat
 python -m pip install -q fastapi uvicorn groq
 
-:: 6. Build database inside project folder
+:: 6. Build database
 if not exist "data\muet.db" (
     echo Building prospectus database...
     python setup_db.py
@@ -55,7 +55,7 @@ if "%GROQ_API_KEY%"=="" (
     set /p GROQ_API_KEY="Enter your Groq API Key: "
 )
 
-:: 8. Launch web server
+:: 8. Launch browser & server
 echo Launching MUET Digital Assistant...
 start http://localhost:8001
 python -m uvicorn backend.main:app --port 8001

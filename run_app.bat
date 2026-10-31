@@ -8,16 +8,13 @@ echo ===================================================
 :: 1. Verify Python availability
 where python >nul 2>nul
 if %errorlevel% neq 0 (
-    echo.
     echo [ERROR] Python is not installed or not added to PATH on this PC.
-    echo Please install Python 3.10+ and check "Add python.exe to PATH".
-    echo.
     pause
     exit /b
 )
 
-:: 2. Download Project Archive if missing
-if not exist "Muet_Digital_Assistant-main" if not exist "Muet_Digital_Assistant" (
+:: 2. Download via Git or PowerShell ZIP Fallback
+if not exist "Muet_Digital_Assistant" if not exist "Muet_Digital_Assistant-main" (
     where git >nul 2>nul
     if %errorlevel% equ 0 (
         echo Downloading application code via Git...
@@ -30,14 +27,14 @@ if not exist "Muet_Digital_Assistant-main" if not exist "Muet_Digital_Assistant"
     )
 )
 
-:: 3. Change directory into project folder BEFORE running Python setup commands
+:: 3. Force change into the unzipped or cloned project directory
 if exist "Muet_Digital_Assistant" (
-    cd Muet_Digital_Assistant
+    cd /d "%~dp0Muet_Digital_Assistant"
 ) else if exist "Muet_Digital_Assistant-main" (
-    cd Muet_Digital_Assistant-main
+    cd /d "%~dp0Muet_Digital_Assistant-main"
 )
 
-:: 4. Create virtual environment
+:: 4. Create virtual environment inside project folder
 if not exist "venv" (
     echo Creating Python environment...
     python -m venv venv
@@ -47,18 +44,18 @@ if not exist "venv" (
 call venv\Scripts\activate.bat
 python -m pip install -q fastapi uvicorn groq
 
-:: 6. Build database
+:: 6. Build database inside project folder
 if not exist "data\muet.db" (
     echo Building prospectus database...
     python setup_db.py
 )
 
-:: 7. Prompt for API Key securely
+:: 7. Prompt for API Key
 if "%GROQ_API_KEY%"=="" (
     set /p GROQ_API_KEY="Enter your Groq API Key: "
 )
 
-:: 8. Launch browser & server
+:: 8. Launch web server
 echo Launching MUET Digital Assistant...
 start http://localhost:8001
 python -m uvicorn backend.main:app --port 8001

@@ -99,7 +99,7 @@ def synthesize_with_llm(query: str, context: str) -> str:
         "You are the official MUET Digital Assistant.\n"
         "Instructions:\n"
         "1. Identify the core subject of the user's inquiry (e.g., for 'how to enter in gymnasium', the topic is 'the MUET Gymnasium & Sports Facilities').\n"
-        "2. Start your response with exactly: 'Here is the complete knowledge about [extracted topic]:'\n"
+        "2. Start your response with exactly: 'Here is the complete information about [extracted topic]:'\n"
         "3. Synthesize a helpful, complete explanation using the provided prospectus context.\n"
         "4. Conclude with a clear summary sentence. Ensure no sentence is left incomplete."
     )

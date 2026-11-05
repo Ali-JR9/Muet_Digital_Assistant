@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUET Digital Assistant</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b132b;
+            color: #ffffff;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #0b132b;
+            border-bottom: 1px solid #1c2541;
+        }
+        .logo-section h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .logo-section p {
+            margin: 0;
+            font-size: 12px;
+            color: #8d99ae;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #3a86ff;
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+        }
+        h1.title {
+            font-size: 38px;
+            color: #48cae4;
+            margin-bottom: 30px;
+        }
+        .search-box {
+            display: flex;
+            width: 600px;
+            background-color: #1c2541;
+            border-radius: 8px;
+            border: 1px solid #3a506b;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-box button {
+            padding: 0 25px;
+            background-color: #0077b6;
+            color: #ffffff;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-box button:hover {
+            background-color: #0096c7;
+        }
+        .result-container {
+            width: 600px;
+            margin-top: 30px;
+            background-color: #1c2541;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #3a506b;
+            min-height: 120px;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            line-height: 1.6;
+        }
+        /* Modal Styles for History */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #1c2541;
+            padding: 30px;
+            border-radius: 8px;
+            width: 500px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #3a506b;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .close-btn {
+            cursor: pointer;
+            font-size: 20px;
+            color: #8d99ae;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-section">
+            <h1>Mehran UET</h1>
+            <p>Jamshoro, Pakistan</p>
+        </div>
+        <nav>
+            <a href="#" onclick="resetSearch()">New Search</a>
+            <a href="#" onclick="openHistory()">History</a>
+            <a href="#" onclick="alert('MUET Digital Assistant - Developed for academic submission')">About</a>
+            <a href="#" onclick="alert('Contact: Mehran University of Engineering and Technology, Jamshoro')">Contact</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <h2 class="title">MUET Digital Assistant</h2>
+        
+        <div class="search-box">
+            <input type="text" id="queryInput" placeholder="Ask any question about MUET prospectus..." onkeypress="handleKey(event)">
+            <button onclick="performSearch()">Search</button>
+        </div>
+
+        <div id="resultBox" class="result-container">
+            <p style="color: #8d99ae;">Ask any question above to search the prospectus database.</p>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="margin: 0; color: #48cae4;">Search History</h3>
+                <span class="close-btn" onclick="closeHistory()">&times;</span>
+            </div>
+            <div id="historyList" style="color: #cbd5e1;">
+                <p>No recent searches.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function performSearch() {
+            const query = document.getElementById('queryInput').value.trim();
+            const resultBox = document.getElementById('resultBox');
+            
+            if (!query) return;
+
+            resultBox.style.display = 'block';
+            resultBox.innerHTML = '<p style="color: #8d99ae;">Searching prospectus database and generating response...</p>';
+
+            try {
+                const response = await fetch('/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: query })
+                });
+                const data = await response.json();
+                resultBox.innerHTML = `<h3 style="margin-top:0; color: #48cae4;">Result:</h3><p>${data.answer || data.result}</p>`;
+            } catch (err) {
+                resultBox.innerHTML = `<p style="color: #ff6b6b;">Error connecting to backend server.</p>`;
+            }
+        }
+
+        function handleKey(e) {
+            if (e.key === 'Enter') performSearch();
+        }
+
+        function resetSearch() {
+            document.getElementById('queryInput').value = '';
+            document.getElementById('resultBox').style.display = 'none';
+        }
+
+        function openHistory() {
+            document.getElementById('historyModal').style.display = 'flex';
+            // Fetch history if endpoint exists
+        }
+
+        function closeHistory() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
